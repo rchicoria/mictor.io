@@ -1,0 +1,141 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after {
+  content: '';
+  content: none; }
+
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+a {
+  outline: 0 !important; }
+
+input:focus, select:focus {
+  outline: none; }
+
+/* menu column */
+/* vertical align */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 100;
+  src: local("Lato Hairline"), local("Lato-Hairline"), url("../fonts/Lato/Lato-Hairline.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: local("Lato Light"), local("Lato-Light"), url("../fonts/Lato/Lato-Light.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Lato Regular"), local("Lato-Regular"), url("../fonts/Lato/Lato-Regular.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Lato Bold"), local("Lato-Bold"), url("../fonts/Lato/Lato-Bold.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  src: local("Lato Black"), local("Lato-Black"), url("../fonts/Lato/Lato-Black.ttf") format("truetype"); }
+h1 {
+  font-size: 2.25em;
+  font-weight: 300; }
+
+h3 {
+  font-size: 1.375em;
+  font-weight: 300;
+  color: #000; }
+
+.grid:after {
+  content: '';
+  display: block;
+  clear: both; }
+@media (max-width: 768px) {
+  .grid .grid-sizer, .grid .grid-item {
+    width: 100%; } }
+@media (min-width: 769px) {
+  .grid .grid-sizer, .grid .grid-item {
+    width: 100%; } }
+@media (min-width: 992px) {
+  .grid .grid-sizer, .grid .grid-item {
+    width: 50%; } }
+@media (min-width: 1920px) {
+  .grid .grid-sizer, .grid .grid-item {
+    width: 25%; } }
+@media (max-width: 768px) {
+  .grid .grid-item {
+    padding-bottom: 15px; } }
+@media (min-width: 769px) {
+  .grid .grid-item {
+    padding-bottom: 15px; } }
+@media (min-width: 992px) {
+  .grid .grid-item {
+    padding: 15px; } }
+.grid .grid-item__100 {
+  width: 100%; }
+
+.row {
+  margin-left: -15px;
+  margin-right: -15px;
+  padding: 0 15px; }
+  .row:before {
+    content: "";
+    display: table; }
+  .row:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .row .col-xs-4 {
+    float: left;
+    width: 33.33333%;
+    text-align: center; }
+  .row .col-xs-6 {
+    float: left;
+    width: 50%; }
+  .row .col-xs-12 {
+    width: 100%; }
+  @media (min-width: 769px) {
+    .row .col-sm-6 {
+      float: left;
+      width: 50%; } }
+
+body {
+  background-color: #fff;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 100%;
+  color: #000; }
+
+/*# sourceMappingURL=main.css.map */

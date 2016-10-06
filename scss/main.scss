@@ -1,0 +1,17 @@
+@import "vendor/bourbon";
+@import "partials/reset";
+@import "partials/mixins";
+@import "modules/colors";
+@import "partials/typography";
+@import "modules/grid";
+@import "modules/buttons";
+@import "partials/menu";
+
+body {
+  background-color: $white;
+  font-family: $base-font-family;
+  font-weight: $base-font-weight;
+  font-style: $base-font-style;
+  font-size: $base-font-size;
+  color: $text-color;
+}
