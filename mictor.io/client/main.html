@@ -7,8 +7,20 @@
             {{>urinal}}
           {{/each}}
         </ul>
-        Algorithm violations.<br />
-        Wait time.<br />
+        <ul class="cenas">
+          <li>
+            <!-- <img src="/images/dislike.svg" alt="" />
+            <span class="test">Isn't a good time<br /> to go</span> -->
+
+            <img src="/images/like.svg" alt="" />
+            <span class="test">It's a good time<br /> to go</span>
+          </li>
+
+          <li>
+            <h2>0</h2>
+            <span class="test">Algorithm<br /> violations</span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -56,7 +68,7 @@
 
 <template name="urinal">
   <li>
-    <img src="/images/urinal.svg" alt="Urinal #1" />
+    <img src="/images/urinal.svg" alt="Urinal #{{ pos }}" />
     <div class="status status-{{#if wating_for_piss}}free{{else}}busy{{/if}}"></div>
   </li>
 </template>

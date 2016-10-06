@@ -48,21 +48,16 @@ h1 {
   font-weight: $light;
 }
 
-// h2 {
-//   font-size: em(30px);
-//   font-weight: $light;
-//
-//   &.section-title {
-//     margin-bottom: em(30px);
-//     color: $cf-green-b1;
-//   }
-// }
-
-h3 {
-  font-size: em(22px);
-  font-weight: $light;
-  color: $black;
+h2 {
+  font-size: em(40px);
+  font-weight: $bold;
 }
+
+// h3 {
+//   font-size: em(22px);
+//   font-weight: $light;
+//   color: $black;
+// }
 
 // a {
 //   font-weight: $regular !important;
