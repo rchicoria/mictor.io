@@ -1,0 +1,10 @@
+{
+  "name": "mictor.io-tester",
+  "private": true,
+  "scripts": {
+    "start": "node"
+  },
+  "dependencies": {
+    "mqtt": "~2.0.1"
+  }
+}

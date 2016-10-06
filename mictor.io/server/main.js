@@ -13,8 +13,9 @@ Meteor.startup(() => {
 
   MQTTClient.on('message', Meteor.bindEnvironment(function(topic, message){
       var jsonMessage = JSON.parse(message.toString())
+      console.log(topic);
       if(topic === 'mictor-io.start') {
-        console.log(jsonMessage.frame_id  );
+        console.log(jsonMessage.frame_id);
         Urinals.update(
           {id: jsonMessage.frame_id},
           {
