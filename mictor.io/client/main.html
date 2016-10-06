@@ -3,15 +3,21 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  {{#each urinals}}
+    {{> urinal}}
+  {{/each}}
 
-  {{> hello}}
-  {{> info}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="urinal">
+  <div style="border: 1px; padding: 5px;">
+    {{#if occupied}}
+      <span>OCCUPIED</span>
+    {{else}}
+      <span>FREE</span>
+    {{/if}}
+
+  </div>
 </template>
 
 <template name="info">

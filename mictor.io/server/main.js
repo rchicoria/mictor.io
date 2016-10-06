@@ -1,12 +1,8 @@
 import { Meteor } from 'meteor/meteor';
+import { Pees } from '/imports/collections/pees'
+import { Urinals } from '/imports/collections/urinals'
 
 Meteor.startup(() => {
-  const Pees = new Mongo.Collection('pees');
-
-  Pees.before.insert(function (userId, doc) {
-    doc.createdAt = Date.now();
-  });
-
   const mqtt = require('mqtt');
   const MQTTClient = mqtt.connect('mqtt://localhost');
 
@@ -16,9 +12,21 @@ Meteor.startup(() => {
   });
 
   MQTTClient.on('message', Meteor.bindEnvironment(function(topic, message){
+      var jsonMessage = JSON.parse(message.toString())
       if(topic === 'mictor-io.start') {
+        console.log(jsonMessage.frame_id  );
+        Urinals.update(
+          {id: jsonMessage.frame_id},
+          {
+            $set: { occupied: true },
+          });
       } else if(topic === 'mictor-io.end') {
-          Pees.insert(JSON.parse(message.toString()));
+        Urinals.update(
+          {id: jsonMessage.frame_id},
+          {
+            $set: { occupied: false },
+          });
+        Pees.insert(jsonMessage);
       }
     })
   );
