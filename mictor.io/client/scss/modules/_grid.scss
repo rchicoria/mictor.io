@@ -67,8 +67,10 @@
       }
 
       &.grid-purple {
+        @include display(flex);
         background-color: $purple;
-        color: $white;
+        font-size: em(20px);
+        color: darken($purple, 15%);
       }
 
       &.grid-grey {
