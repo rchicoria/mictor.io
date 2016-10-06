@@ -1,0 +1,11 @@
+{
+  "name": "mictor.io",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "meteor-node-stubs": "~0.2.0",
+    "mqtt": "~2.0.1"
+  }
+}
