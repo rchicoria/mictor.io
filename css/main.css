@@ -157,6 +157,9 @@ h3 {
   .grid div div.grid-grey {
     background-color: #455A64;
     color: #FFFFFF; }
+  .grid div div.grid-green {
+    background-color: #1DE9B6;
+    color: rgba(0, 0, 0, 0.7); }
 
 body {
   background-color: #FFFFFF;
