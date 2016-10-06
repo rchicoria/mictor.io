@@ -34,13 +34,21 @@ ul {
     }
   }
 
-  &.cenas {
+  &.urinals-metrics {
     color: darken($blue, 10%);
     font-weight: $bold;
 
     li {
       @include margin(50px 10px null 10px);
       text-align: left;
+
+      &:first-child {
+        width: 170px;
+      }
+
+      &:last-child {
+        width: 105px;
+      }
 
       h2 {
         float: left;
