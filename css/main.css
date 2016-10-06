@@ -130,7 +130,7 @@ h3 {
       width: 100%; } }
 .grid-100 {
   width: 100%; }
-.grid div div {
+.grid div > div {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   box-flex: 1;
@@ -139,27 +139,51 @@ h3 {
   -ms-flex: 1;
   flex: 1;
   padding: 50px; }
-  .grid div div.grid-white {
+  .grid div > div.grid-white {
     background-color: #FFFFFF;
     color: rgba(0, 0, 0, 0.7); }
-  .grid div div.grid-yellow {
+  .grid div > div.grid-yellow {
     background-color: #FDD835;
     color: rgba(0, 0, 0, 0.7); }
-  .grid div div.grid-orange {
+  .grid div > div.grid-orange {
     background-color: #FF5722;
     color: #FFFFFF; }
-  .grid div div.grid-blue {
+  .grid div > div.grid-blue {
     background-color: #03A9F4;
     color: #FFFFFF; }
-  .grid div div.grid-purple {
+  .grid div > div.grid-purple {
     background-color: #B39DDB;
     color: #FFFFFF; }
-  .grid div div.grid-grey {
+  .grid div > div.grid-grey {
     background-color: #455A64;
     color: #FFFFFF; }
-  .grid div div.grid-green {
+  .grid div > div.grid-green {
     background-color: #1DE9B6;
     color: rgba(0, 0, 0, 0.7); }
+
+ul.urinals {
+  text-align: center; }
+  ul.urinals li {
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 10px; }
+    ul.urinals li img {
+      width: auto;
+      height: 200px; }
+    ul.urinals li .status {
+      margin-top: 10px;
+      margin-right: auto;
+      margin-left: auto;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border-width: 6px;
+      border-style: solid;
+      border-color: #0398db; }
+      ul.urinals li .status-busy {
+        background-color: #FF5722; }
+      ul.urinals li .status-free {
+        background-color: #1DE9B6; }
 
 body {
   background-color: #FFFFFF;
