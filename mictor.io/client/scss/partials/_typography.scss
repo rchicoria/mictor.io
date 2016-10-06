@@ -44,11 +44,16 @@ $base-font-weight: $regular;
 $base-font-size: 100%;
 
 h1 {
-  font-size: em(36px);
-  font-weight: $light;
+  font-size: em(100px);
+  font-weight: $bold;
 }
 
 h2 {
+  font-size: em(60px);
+  font-weight: $bold;
+}
+
+h3 {
   font-size: em(40px);
   font-weight: $bold;
 }

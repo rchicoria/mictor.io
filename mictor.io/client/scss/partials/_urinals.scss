@@ -37,20 +37,20 @@ ul {
   &.urinal-metrics {
     color: darken($blue, 10%);
     font-weight: $bold;
+    @include display(flex);
+    @include flex-direction(row);
 
     li {
       @include margin(50px 10px null 10px);
+      width: 100%;
       text-align: left;
 
       &:first-child {
-        width: 170px;
+        @include display(flex);
+        @include justify-content(flex-end);
       }
 
-      &:last-child {
-        width: 105px;
-      }
-
-      h2 {
+      h3 {
         float: left;
         display: table-cell;
       }
