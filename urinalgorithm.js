@@ -8,41 +8,41 @@ function urinalgorithm(n, urinal_array){
   var i = 0;
 
   for(i = 0; i < n; i++){
-    console.log('Urinal ', i)
+    //console.log('Urinal ', i)
     //left side
-    if(urinal_array[i] == 0){
+    if(urinal_array[i] == 0){ //only compute distance for vacant urinols
       if(i == 0){
         left_d = n-1;
-        console.log('Left distance', left_d);
+        //console.log('Left distance', left_d);
         //first urinol left distance is max distance
       }else{
         for(l = i-1; l > -1; l--){
             if(urinal_array[l] == 1){ //is occupied
               left_d = i-l-1;
-              console.log('Left distance', left_d);
+              //console.log('Left distance', left_d);
               break;
             }
             if(l == 0){
               left_d = i;
-              console.log('Left distance', left_d);
+              //console.log('Left distance', left_d);
             }
         }
       }
       //right side
       if(i == n-1){
         right_d = n-1;
-        console.log('Right distance', right_d);
+        //console.log('Right distance', right_d);
         //last urinol right distance is max distance
       }else{
         for(r = i+1; r < n; r++){
             if(urinal_array[r] == 1){ //is occupied
               right_d = r-1-i;
-              console.log('Right distance', right_d);
+              //console.log('Right distance', right_d);
               break;
             }
             if(r == n-1){
               right_d = n-1-i;
-              console.log('Right distance', right_d);
+              //console.log('Right distance', right_d);
             }
         }
       }
@@ -59,7 +59,7 @@ function urinalgorithm(n, urinal_array){
         max_uri.push(i);
       }
     }
-    console.log('total distance ', tot_dist[i])
+    //console.log('total distance ', tot_dist[i])
     left_d = 0;
     right_d = 0;
   }
@@ -71,16 +71,8 @@ function urinalgorithm(n, urinal_array){
         max_uri.push(i);
       }
     }
-  }
+  } //returns all vacant urinols as best option
 
   return max_uri;
 
 }
-
-//var urinal_array = [1,1,0,1,0,1];
-var urinal_array = [1,1,1,1,1,1];
-var n = 6;
-var max_uri = []
-
-max_uri = urinalgorithm(n, urinal_array);
-console.log(max_uri);
