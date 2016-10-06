@@ -1,30 +1,63 @@
-ul.urinals {
+ul {
   text-align: center;
 
   li {
     display: inline-block;
-    @include margin(null 10px null 10px);
+  }
 
-    img {
-      width: auto;
-      height: 200px;
-    }
+  &.urinals {
+    li {
+      @include margin(null 10px null 10px);
 
-    .status {
-      @include margin(10px auto null auto);
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border-width: 6px;
-      border-style: solid;
-      border-color: darken($blue, 5%);
-
-      &-busy {
-        background-color: $orange;
+      img {
+        width: auto;
+        height: 200px;
       }
 
-      &-free {
-        background-color: $green;
+      .status {
+        @include margin(10px auto null auto);
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border-width: 6px;
+        border-style: solid;
+        border-color: darken($blue, 5%);
+
+        &-busy {
+          background-color: $orange;
+        }
+
+        &-free {
+          background-color: $green;
+        }
+      }
+    }
+  }
+
+  &.cenas {
+    color: darken($blue, 10%);
+    font-weight: $bold;
+
+    li {
+      @include margin(50px 10px null 10px);
+      text-align: left;
+
+      h2 {
+        float: left;
+        display: table-cell;
+      }
+
+      img {
+        @extend h2;
+        width: auto;
+        height: 40px;
+      }
+
+      span {
+        display: table-cell;
+        padding-left: 10px;
+        font-weight: $regular;
+        line-height: 20px;
       }
     }
   }
