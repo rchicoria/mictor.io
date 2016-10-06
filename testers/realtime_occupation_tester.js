@@ -7,8 +7,8 @@ var pissingMax = 30000;
 var sleepingMin = 1000;
 var sleepingMax = 5000;
 
-var distanceMin = 5;
-var distanceMax = 15;
+var distanceMin = 0.05;
+var distanceMax = 0.15;
 
 var rand = function(min, max){
   return Math.random() * (max - min) + min;
@@ -28,8 +28,18 @@ var endCallback = function(id, pissingTime){
 
 var startCallback = function(id){
   console.log("START "+id);
+
+  var myRandomValue = Math.random();
+  var violated = false;
+  if(myRandomValue > 0.7){
+    violated = true;
+  }
+
   MQTTClient.publish('mictor-io.start', JSON.stringify({
-    "frame_id": id
+    "frame_id": id,
+    "data": {
+      "waiting_for_piss": !violated
+    }
   }));
   var pissingTime = rand(pissingMin, pissingMax);
   setTimeout(endCallback, pissingTime, id, pissingTime);

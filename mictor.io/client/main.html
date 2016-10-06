@@ -3,35 +3,9 @@
     <div class="grid-100">
       <div class="grid-blue">
         <ul class="urinals">
-          <li>
-            <img src="/images/urinal.svg" alt="Urinal #1" />
-            <div class="status status-busy"></div>
-          </li>
-
-          <li>
-            <img src="/images/urinal.svg" alt="Urinal #1" />
-            <div class="status status-busy"></div>
-          </li>
-
-          <li>
-            <img src="/images/urinal.svg" alt="Urinal #1" />
-            <div class="status status-busy"></div>
-          </li>
-
-          <li>
-            <img src="/images/urinal.svg" alt="Urinal #1" />
-            <div class="status status-busy"></div>
-          </li>
-
-          <li>
-            <img src="/images/urinal.svg" alt="Urinal #1" />
-            <div class="status status-free"></div>
-          </li>
-
-          <li>
-            <img src="/images/urinal.svg" alt="Urinal #1" />
-            <div class="status status-busy"></div>
-          </li>
+          {{#each urinals}}
+            {{>urinal}}
+          {{/each}}
         </ul>
         Algorithm violations.<br />
         Wait time.<br />
@@ -79,3 +53,10 @@
     </div>
   </div>
 </body>
+
+<template name="urinal">
+  <li>
+    <img src="/images/urinal.svg" alt="Urinal #1" />
+    <div class="status status-{{#if occupied}}busy{{else}}free{{/if}}"></div>
+  </li>
+</template>
