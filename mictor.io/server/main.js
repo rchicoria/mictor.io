@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Pees } from '/imports/collections/pees'
 import { Urinals } from '/imports/collections/urinals'
+import { Metrics } from '/imports/collections/metrics'
 
 var urinalgorithm = function(input){
   var output = [];
@@ -26,11 +27,7 @@ var callAlgorithm = function(){
     algorithmInput.push(input);
   }
 
-  console.log(algorithmInput);
-
   var algorithmOutput = urinalgorithm(algorithmInput);
-  console.log(algorithmOutput);
-  console.log(Urinals.find({pos: 1 }).fetch());
   Urinals.update({pos: {"$nin": algorithmOutput }}, {"$set": {wating_for_piss: false}}, {multi: true});
   Urinals.update({pos: {"$in": algorithmOutput }}, {"$set": {wating_for_piss: true}}, {multi: true});
 }
@@ -45,23 +42,38 @@ Meteor.startup(() => {
   });
 
   MQTTClient.on('message', Meteor.bindEnvironment(function(topic, message){
-      var jsonMessage = JSON.parse(message.toString())
-      if(topic === 'mictor-io.start') {
-        Urinals.update(
-          {id: jsonMessage.frame_id},
-          {
-            $set: { occupied: true },
-          });
-        callAlgorithm();
-      } else if(topic === 'mictor-io.end') {
-        Urinals.update(
-          {id: jsonMessage.frame_id},
-          {
-            $set: { occupied: false },
-          });
-        Pees.insert(jsonMessage);
-        callAlgorithm();
+      var jsonMessage = JSON.parse(message.toString());
+
+      var now = new Date();
+      var minDate = new Date(now - 3 * 60*1000);
+      var peesCount = Pees.find({createdAt: {"$gt": minDate}}).count();
+
+      var metricsUpdateDict = {};
+      var urinalUpdateDict = {};
+
+      if(peesCount > 10){
+        metricsUpdateDict["$set"] = {ok: false};
+      } else {
+        metricsUpdateDict["$set"] = {ok: true};
       }
+
+      if(topic === 'mictor-io.start') {
+        urinalUpdateDict["$set"] = { occupied: true };
+
+        if(!jsonMessage.data.waiting_for_piss){
+          metricsUpdateDict["$inc"] = {violations: 1}
+        }
+      } else if(topic === 'mictor-io.end') {
+        urinalUpdateDict["$set"] = { occupied: false };
+        Pees.insert(jsonMessage);
+      }
+
+      Metrics.update({}, metricsUpdateDict);
+      Urinals.update(
+        {id: jsonMessage.frame_id},
+        urinalUpdateDict
+      );
+      callAlgorithm();
     })
   );
 });

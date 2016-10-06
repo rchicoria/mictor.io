@@ -8,18 +8,23 @@
           {{/each}}
         </ul>
         <ul class="urinal-metrics">
-          <li>
-            <!-- <img src="/images/dislike.svg" alt="" />
-            <span class="test">Isn't a good time<br /> to go</span> -->
-
-            <img src="/images/like.svg" alt="" />
-            <span class="test">It's a good time<br /> to go</span>
-          </li>
-
-          <li>
-            <h2>0</h2>
-            <span class="test">Algorithm<br /> violations</span>
-          </li>
+          {{ #with metrics }}
+            <li>
+              {{ #if ok}}
+                <img src="/images/like.svg" alt="" />
+                <span class="test">It's a good time<br /> to go</span>
+              {{ else }}
+                <img src="/images/dislike.svg" alt="" />
+                <span class="test">Isn't a good<br /> time to go</span>
+              {{ /if}}
+            </li>
+            <li>
+              <h2>
+                  {{ violations }}
+              </h2>
+              <span class="test">Algorithm<br /> violations</span>
+            </li>
+          {{ /with }}
         </ul>
       </div>
     </div>
