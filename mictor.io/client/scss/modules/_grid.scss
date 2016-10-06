@@ -25,7 +25,7 @@
     width: 100%;
   }
 
-  div {
+  > div {
     > div {
       @include flex(1);
       @include padding(50px 50px 50px 50px);
