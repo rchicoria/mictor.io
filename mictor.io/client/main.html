@@ -1,31 +1,81 @@
-<head>
-  <title>mictor.io</title>
-</head>
-
 <body>
-  {{#each urinals}}
-    {{> urinal}}
-  {{/each}}
+  <div class="grid">
+    <div class="grid-100">
+      <div class="grid-blue">
+        <ul class="urinals">
+          <li>
+            <img src="/images/urinal.svg" alt="Urinal #1" />
+            <div class="status status-busy"></div>
+          </li>
 
-</body>
+          <li>
+            <img src="/images/urinal.svg" alt="Urinal #1" />
+            <div class="status status-busy"></div>
+          </li>
 
-<template name="urinal">
-  <div style="border: 1px; padding: 5px;">
-    {{#if occupied}}
-      <span>OCCUPIED</span>
-    {{else}}
-      <span>FREE</span>
-    {{/if}}
+          <li>
+            <img src="/images/urinal.svg" alt="Urinal #1" />
+            <div class="status status-busy"></div>
+          </li>
 
+          <li>
+            <img src="/images/urinal.svg" alt="Urinal #1" />
+            <div class="status status-busy"></div>
+          </li>
+
+          <li>
+            <img src="/images/urinal.svg" alt="Urinal #1" />
+            <div class="status status-free"></div>
+          </li>
+
+          <li>
+            <img src="/images/urinal.svg" alt="Urinal #1" />
+            <div class="status status-busy"></div>
+          </li>
+        </ul>
+        Algorithm violations.<br />
+        Wait time.<br />
+      </div>
+    </div>
   </div>
-</template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
-</template>
+  <div class="grid">
+    <div class="grid-50">
+      <div class="grid-yellow">
+        Average time
+      </div>
+    </div>
+
+    <div class="grid-50 grid-50__vertical">
+      <div class="grid-white">
+        Max time.
+      </div>
+
+      <div class="grid-orange">
+        Min time.
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="grid-50">
+      <div class="grid-purple">
+        Distance.
+      </div>
+    </div>
+
+    <div class="grid-50">
+      <div class="grid-grey">
+        Affluence line chart.
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="grid-100">
+      <div class="grid-green">
+        Top urinal bar chart.
+      </div>
+    </div>
+  </div>
+</body>

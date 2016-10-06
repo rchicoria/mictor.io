@@ -1,0 +1,17 @@
+@import "{wolves:bourbon}/bourbon";
+@import "{}/client/scss/partials/reset";
+@import "{}/client/scss/partials/mixins";
+@import "{}/client/scss/modules/colors";
+@import "{}/client/scss/partials/typography";
+@import "{}/client/scss/modules/grid";
+@import "{}/client/scss/modules/buttons";
+@import "{}/client/scss/partials/urinals";
+
+body {
+  background-color: $white;
+  font-family: $base-font-family;
+  font-weight: $base-font-weight;
+  font-style: $base-font-style;
+  font-size: $base-font-size;
+  color: $black;
+}
