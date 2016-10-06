@@ -57,6 +57,6 @@
 <template name="urinal">
   <li>
     <img src="/images/urinal.svg" alt="Urinal #1" />
-    <div class="status status-{{#if occupied}}busy{{else}}free{{/if}}"></div>
+    <div class="status status-{{#if wating_for_piss}}free{{else}}busy{{/if}}"></div>
   </li>
 </template>
