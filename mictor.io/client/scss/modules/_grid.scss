@@ -96,6 +96,7 @@
         .metric-content {
           position: absolute;
           bottom: 0;
+          max-width: 50%;
           @include padding(50px 50px 50px 50px);
 
           &__desc {

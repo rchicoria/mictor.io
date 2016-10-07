@@ -46,7 +46,7 @@ Template.distance.helpers({
 // });
 
 // AFFLUENCE CHART
-var lineChartData = {
+var affluence_chart_data = {
 	labels : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
 	datasets : [
     {
@@ -58,8 +58,8 @@ var lineChartData = {
 }
 
 window.onload = function(){
-	var ctx = document.getElementById("canvas").getContext("2d");
-	window.myLine = new Chart(ctx).Line(lineChartData, {
+	var ctx = document.getElementById("affluence_chart").getContext("2d");
+	window.myLine = new Chart(ctx).Line(affluence_chart_data, {
 		responsive: true,
     showScale: false,
     showTooltips: false,
