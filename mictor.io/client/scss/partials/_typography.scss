@@ -57,3 +57,23 @@ h3 {
   font-size: em(40px);
   font-weight: $bold;
 }
+
+p {
+  font-weight: $regular;
+  line-height: 22px;
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+a {
+  color: $white;
+  text-decoration: none;
+  @include transition-duration(.2s);
+
+  &:hover {
+    color: $blue;
+  }
+}
