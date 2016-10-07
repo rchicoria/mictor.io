@@ -75,12 +75,33 @@
 
       &.grid-grey {
         background-color: $grey;
-        color: $white;
+        color: darken($grey, 15%);
       }
 
       &.grid-green {
         background-color: $green;
         color: rgba($black, .7);
+      }
+
+      &.grid-chart {
+        position: relative;
+        @include padding(0 0 0 0);
+
+        canvas {
+          width: 100%;
+          height: auto;
+          @include margin(null null -6px null);
+        }
+
+        .metric-content {
+          position: absolute;
+          bottom: 0;
+          @include padding(50px 50px 50px 50px);
+
+          &__desc {
+            font-size: em(20px);
+          }
+        }
       }
     }
   }

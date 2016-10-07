@@ -6,6 +6,8 @@ ul {
   }
 
   &.urinals {
+    margin-top: 10px;
+
     li {
       @include margin(null 10px null 10px);
 
