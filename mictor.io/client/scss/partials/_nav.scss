@@ -1,0 +1,10 @@
+nav {
+  background-color: darken($blue, 8%);
+  @include padding(10px null 10px null);
+  text-align: center;
+
+  img {
+    width: auto;
+    height: 50px;
+  }
+}

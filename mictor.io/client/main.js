@@ -27,7 +27,7 @@ Template.time.helpers({
 })
 
 Template.distance.helpers({
-  avgDistance() {
+  averageDistance() {
     console.log("COISAS");
     return Math.round(this.avg_distance*100);
   }

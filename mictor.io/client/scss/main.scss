@@ -4,6 +4,7 @@
 @import "{}/client/scss/modules/colors";
 @import "{}/client/scss/partials/typography";
 @import "{}/client/scss/modules/grid";
+@import "{}/client/scss/partials/nav";
 @import "{}/client/scss/partials/urinals";
 
 body {
@@ -20,4 +21,13 @@ body {
   @include display(flex);
   @include flex-direction(column);
   @include justify-content(flex-end);
+
+  &__desc {
+    width: 100%;
+    @include display(flex);
+    @include flex-direction(row);
+    @include justify-content(space-between);
+    @include align-items(flex-end);
+
+  }
 }
