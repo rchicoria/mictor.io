@@ -173,7 +173,7 @@ Meteor.startup(() => {
         violUrinals[jsonMessage.frame_id] = !jsonMessage.data.waiting_for_piss;
 
       } else if(topic === 'mictor-io.end') {
-        if(jsonMessage.data["time_elapsed"] < 0){
+        if(jsonMessage.data["time_elapsed"] < 3){
           discard=true;
         }
         urinalUpdateDict["$set"]["occupied"] = false;
