@@ -199,11 +199,11 @@ Meteor.startup(() => {
     var max = -1;
     var rushHour = 0;
     for(var i=0; i<24; i++){
-      if(result[i]["total"] > max || result[i]["total"] == -1){
-        max = result[i]["total"];
-        rushHour = i;
-      }
       try {
+        if(result[i]["total"] > max || result[i]["total"] == -1){
+          max = result[i]["total"];
+          rushHour = i;
+        }
         rushHourChartData.push(result[i]["total"]);
       } catch(error){
         rushHourChartData.push(0);
