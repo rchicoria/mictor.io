@@ -205,5 +205,5 @@ Meteor.startup(() => {
     }
 
     Metrics.update({}, {"$set": {"rush_hour_chart": rushHourChartData}})
-  }), 5000);
+  }), 60*1000);
 });

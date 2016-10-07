@@ -105,7 +105,7 @@ Template.rushhour.onRendered(function () {
       pointDot: false,
   	});
     console.log("AGAIN");
-  }, 5000);
+  }, 60*1000);
 });
 
 
