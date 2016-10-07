@@ -187,9 +187,7 @@ Meteor.startup(() => {
         {id: jsonMessage.frame_id},
         urinalUpdateDict
       );
-      if(!discard){
-        callAlgorithm();
-      }
+      callAlgorithm();
     })
   );
 
