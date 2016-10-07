@@ -1,8 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Urinals } from '/imports/collections/urinals'
-import { Metrics } from '/imports/collections/metrics'
-
+import { Urinals } from '/imports/collections/urinals';
+import { Metrics } from '/imports/collections/metrics';
 
 import './main.html';
 
