@@ -56,21 +56,9 @@
   </div>
 
   <div class="grid">
-    <div class="grid-100">
-      <div class="grid-green grid-chart">
-        <canvas id="top_urinal"></canvas>
-
-        <div class="metric-content">
-          <div class="metric-content__value">
-            <h1>#5</h1>
-          </div>
-
-          <div class="metric-content__desc">
-            <span>urinal most used</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    {{ #with metrics }}
+      {{ >mostused }}
+    {{ /with }}
   </div>
 </body>
 
@@ -148,6 +136,25 @@
 
       <div class="metric-content__desc">
         <span>rush hour</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="mostused">
+  <div class="grid-100">
+    <div class="grid-green grid-chart">
+      <canvas id="top_urinal"></canvas>
+
+      <div class="metric-content">
+        <div class="metric-content__value">
+          <h1>#{{ mostUsedUrinal }}</h1>
+          {{trigger}}
+        </div>
+
+        <div class="metric-content__desc">
+          <span>urinal most used</span>
+        </div>
       </div>
     </div>
   </div>

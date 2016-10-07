@@ -54,16 +54,7 @@ Template.distance.helpers({
 // AFFLUENCE CHART
 
 // TOP URINAL
-var barChartData = {
-	labels : ["Urinal #1","Urinal #2","Urinal #3","Urinal #4","Urinal #5","Urinal #6"],
-	datasets : [
-		{
-			fillColor : "rgba(19,192,149,.1)",
-			strokeColor : "rgba(19,192,149,.2)",
-			data : ["2","4","3","5","9","4"],
-		}
-	]
-}
+
 
 Template.rushhour.onRendered(function () {
   function initLineChart(data){
@@ -104,38 +95,95 @@ Template.rushhour.onRendered(function () {
       showTooltips: false,
       pointDot: false,
   	});
-    console.log("AGAIN");
   }, 60*1000);
 });
 
+Template.mostused.helpers({
+  mostUsedUrinal() {
+    return this.most_used+1;
+  },
+  trigger() {
+    console.log("CENAS");
+  }
+});
 
-window.onload = function(){
-  //var ctx = document.getElementById("affluence_chart").getContext("2d");
-	var ctx2 = document.getElementById("top_urinal").getContext("2d");
+Template.mostused.onRendered(function () {
 
-  console.log(Metrics.findOne({}));
+  function initBarChart(data){
+    return {
+      labels : ["Urinal #1","Urinal #2","Urinal #3","Urinal #4","Urinal #5","Urinal #6"],
+    	datasets : [
+    		{
+    			fillColor : "rgba(19,192,149,.1)",
+    			strokeColor : "rgba(19,192,149,.2)",
+    			data : data,
+    		}
+    	]
+    }
+  };
 
-  // var affluence_chart_data = {
-  // 	labels : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
-  // 	datasets : [
-  //     {
-  //       fillColor : "rgba(59,76,85,.4)",
-  //       strokeColor : "rgba(59,76,85,1)",
-  //       data: Metrics.findOne({}).rush_hour_chart
-  //     },
-  // 	]
-  // }
+  var barChart = null;
 
-  // window.myLine = new Chart(ctx).Line(affluence_chart_data, {
-	// 	responsive: true,
-  //   showScale: false,
-  //   showTooltips: false,
-  //   pointDot: false,
-	// });
+  function getData(){
+    Meteor.call('getUrinalsUsage', function (error, result) {
+      if (!error) {
+        var myArray = [];
+        for(var i=0; i<result.length; i++){
+          myArray.push(result[i]["total"]);
+        }
 
-  window.myBar = new Chart(ctx2).Bar(barChartData, {
-		responsive : true,
-    showScale: false,
-    showTooltips: false,
-	});
-}
+        if(barChart){
+          barChart.destroy();
+        }
+
+        barChart = new Chart(ctx2).Bar(initBarChart(myArray), {
+      		responsive : true,
+          showScale: false,
+          showTooltips: false,
+      	});
+      }
+      else {
+      }
+    });
+  }
+
+  getData();
+
+  var ctx2 = document.getElementById("top_urinal").getContext("2d");
+
+  Metrics.find({}).observeChanges({changedAt:function(newDoc, oldDoc, index){
+    console.log("HERE");
+    getData();
+  }});
+});
+
+// window.onload = function(){
+//   //var ctx = document.getElementById("affluence_chart").getContext("2d");
+//
+//
+//   console.log(Metrics.findOne({}));
+//
+//   // var affluence_chart_data = {
+//   // 	labels : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
+//   // 	datasets : [
+//   //     {
+//   //       fillColor : "rgba(59,76,85,.4)",
+//   //       strokeColor : "rgba(59,76,85,1)",
+//   //       data: Metrics.findOne({}).rush_hour_chart
+//   //     },
+//   // 	]
+//   // }
+//
+//   // window.myLine = new Chart(ctx).Line(affluence_chart_data, {
+// 	// 	responsive: true,
+//   //   showScale: false,
+//   //   showTooltips: false,
+//   //   pointDot: false,
+// 	// });
+//
+//   window.myBar = new Chart(ctx2).Bar(barChartData, {
+// 		responsive : true,
+//     showScale: false,
+//     showTooltips: false,
+// 	});
+// }

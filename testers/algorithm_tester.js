@@ -29,8 +29,6 @@ var endCallback = function(id, pissingTime){
 var startCallback = function(){
   var myId = "urinol2"//"mictor"+Math.round(rand(1,6));
 
-  console.log("START "+myId);
-
   var myRandomValue = Math.random();
   var violated = false;
   if(myRandomValue > 0.7){

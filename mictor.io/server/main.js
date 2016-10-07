@@ -94,6 +94,24 @@ Meteor.startup(() => {
   const mqtt = require('mqtt');
   const MQTTClient = mqtt.connect('mqtt://localhost');
 
+  Meteor.methods({
+    getUrinalsUsage: function () {
+      try {
+        var pipeline = [
+          {
+            $group: {_id: "$frame_id", "total":{$sum: 1}}
+          },
+          {
+            $sort: {_id: 1}
+          }
+        ];
+        return Pees.aggregate(pipeline);
+      } catch(e){
+        throw Meteor.Error('some-error', 'Bad things happened.');
+      }
+    }
+  });
+
   var callAlgorithm = function(){
     var pees = Urinals.find({}, {sort: {"pos": 1}}).fetch();
     var algorithmInput = [];
@@ -181,6 +199,19 @@ Meteor.startup(() => {
           if(violUrinals[jsonMessage.frame_id]){
             metricsUpdateDict["$inc"] = {violations: 1}
           }
+          pipeline = [
+            {
+              $group: {_id: "$frame_id", counter: {$sum: 1}},
+            },
+            {
+              $sort : {counter: -1}
+            },
+            {
+              $limit : 1
+            }
+          ];
+          metricsUpdateDict["$set"]["most_used"] = Urinals.findOne({id: Pees.aggregate(pipeline)[0]["_id"]})["pos"];
+
           Pees.insert(jsonMessage);
         }
       }
@@ -209,9 +240,7 @@ Meteor.startup(() => {
     var rushHourChartData = [];
     var max = -1;
     var rushHour = 0;
-    console.log(result);
     for(var i=0; i<24; i++){
-      console.log(i);
       if(result.length > 0 && result[0]["_id"] == i){
         if(result[0]["total"] > max || max == -1){
           max = result[0]["total"];
@@ -231,7 +260,6 @@ Meteor.startup(() => {
       //   rushHourChartData.push(0);
       //   console.log("error");
       // }
-      console.log(rushHourChartData);
     }
 
     Metrics.update({}, {"$set": {"rush_hour_chart": rushHourChartData, "rush_hour": rushHour}})
