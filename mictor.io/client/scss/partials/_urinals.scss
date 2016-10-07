@@ -1,19 +1,28 @@
-ul {
-  text-align: center;
-
-  li {
-    display: inline-block;
+.urinals-content {
+  > div {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
-  &.urinals {
+  &__list {
     margin-top: 10px;
 
     li {
       @include margin(null 10px null 10px);
+      width: 12%;
+      max-width: 93px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
 
       img {
-        width: auto;
-        height: 200px;
+        width: 100%;
+        height: auto;
       }
 
       .status {
@@ -36,7 +45,7 @@ ul {
     }
   }
 
-  &.urinal-metrics {
+  &__metrics {
     color: darken($blue, 10%);
     font-weight: $bold;
     @include display(flex);

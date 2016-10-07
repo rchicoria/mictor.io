@@ -4,14 +4,15 @@
   </nav>
 
   <div class="grid">
-    <div class="grid-100">
+    <div class="grid-100 urinals-content">
       <div class="grid-blue">
-        <ul class="urinals">
+        <ul class="urinals-content__list">
           {{#each urinals}}
             {{>urinal}}
           {{/each}}
         </ul>
-        <ul class="urinal-metrics">
+
+        <ul class="urinals-content__metrics">
           {{ #with metrics }}
             <li>
               {{ #if ok}}

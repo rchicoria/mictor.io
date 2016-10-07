@@ -16,6 +16,14 @@ body {
   color: $black;
 }
 
+ul {
+  text-align: center;
+
+  li {
+    display: inline-block;
+  }
+}
+
 .metric-content {
   width: 100%;
   @include display(flex);
