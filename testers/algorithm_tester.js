@@ -23,7 +23,7 @@ var endCallback = function(id, pissingTime){
       "time_elapsed": pissingTime
     }
   }));
-  setTimeout(startCallback, 5000);
+  //setTimeout(startCallback, 5000);
 }
 
 var startCallback = function(){
