@@ -150,6 +150,8 @@ Meteor.startup(() => {
         }
       ];
 
+      var discard = false;
+
       var result = Pees.aggregate(pipeline);
       try {
         metricsUpdateDict["$set"]["avg_time"] = result[0]["avg_time"];
@@ -171,19 +173,23 @@ Meteor.startup(() => {
         }
       } else if(topic === 'mictor-io.end') {
         if(jsonMessage.data["time_elapsed"] < 0){
-          return;
+          discard=true;
         }
         urinalUpdateDict["$set"]["occupied"] = false;
-
-        Pees.insert(jsonMessage);
+        if(!discard){
+          Pees.insert(jsonMessage);
+        }
       }
-
-      Metrics.update({}, metricsUpdateDict);
+      if(!discard){
+        Metrics.update({}, metricsUpdateDict);
+      }
       Urinals.update(
         {id: jsonMessage.frame_id},
         urinalUpdateDict
       );
-      callAlgorithm();
+      if(!discard){
+        callAlgorithm();
+      }
     })
   );
 
