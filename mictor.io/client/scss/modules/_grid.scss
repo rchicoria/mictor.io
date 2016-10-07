@@ -20,14 +20,22 @@
       }
 
       .metric-content {
-        @include display(flex);
-        @include flex-direction(row);
-        @include justify-content(flex-start);
-        @include align-items(flex-end);
+        @include respond-to('screen-sm') {
+          @include display(flex);
+          @include flex-direction(row);
+          @include justify-content(flex-start);
+          @include align-items(flex-end);
+        }
 
         h2 {
-          line-height: 48px;
-          padding-right: 6px;
+          @include respond-to('screen-xs') {
+            font-size: em(100px);
+          }
+
+          @include respond-to('screen-sm') {
+            line-height: 48px;
+            padding-right: 6px;
+          }
         }
       }
 
@@ -41,8 +49,12 @@
   > div {
     > div {
       @include flex(1);
-      @include padding(50px 50px 50px 50px);
       font-weight: $bold;
+      @include padding(50px 50px 50px 50px);
+
+      @include respond-to('screen-xs') {
+        @include padding(20px 20px 20px 20px);
+      }
 
       &.grid-white {
         background-color: $white;
@@ -52,8 +64,11 @@
       &.grid-yellow {
         @include display(flex);
         background-color: $yellow;
-        font-size: em(20px);
         color: darken($yellow, 25%);
+
+        @include respond-to('screen-sm') {
+          font-size: em(20px);
+        }
       }
 
       &.grid-orange {
@@ -69,8 +84,11 @@
       &.grid-purple {
         @include display(flex);
         background-color: $purple;
-        font-size: em(20px);
         color: darken($purple, 15%);
+
+        @include respond-to('screen-sm') {
+          font-size: em(20px);
+        }
       }
 
       &.grid-grey {
@@ -99,8 +117,14 @@
           max-width: 50%;
           @include padding(50px 50px 50px 50px);
 
+          @include respond-to('screen-xs') {
+            @include padding(20px 20px 20px 20px);
+          }
+
           &__desc {
-            font-size: em(20px);
+            @include respond-to('screen-sm') {
+              font-size: em(20px);
+            }
           }
         }
       }
