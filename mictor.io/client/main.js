@@ -5,6 +5,12 @@ import { Metrics } from '/imports/collections/metrics';
 
 import './main.html';
 
+Template.body.onCreated(function bodyOnCreated() {
+  this.state = new ReactiveVar();
+  Meteor.subscribe('urinals');
+  Meteor.subscribe('metrics');
+});
+
 Template.body.helpers({
   urinals() {
     return Urinals.find({});
@@ -46,16 +52,6 @@ Template.distance.helpers({
 // });
 
 // AFFLUENCE CHART
-var affluence_chart_data = {
-	labels : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
-	datasets : [
-    {
-      fillColor : "rgba(59,76,85,.4)",
-      strokeColor : "rgba(59,76,85,1)",
-      data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56],
-    },
-	]
-}
 
 // TOP URINAL
 var barChartData = {
@@ -69,20 +65,77 @@ var barChartData = {
 	]
 }
 
-window.onload = function(){
-  var ctx = document.getElementById("affluence_chart").getContext("2d");
-	var ctx2 = document.getElementById("top_urinal").getContext("2d");
+Template.rushhour.onRendered(function () {
+  function initLineChart(data){
+    return {
+      labels : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
+      datasets : [
+        {
+          fillColor : "rgba(59,76,85,.4)",
+          strokeColor : "rgba(59,76,85,1)",
+          data: data
+        },
+      ]
+    }
+  };
 
-  window.myLine = new Chart(ctx).Line(affluence_chart_data, {
+  var lineChart = null;
+  var ctx = document.getElementById("affluence_chart").getContext("2d");
+
+  var chartData = Metrics.findOne().rush_hour_chart;
+
+  var affluence_chart_data = initLineChart(chartData);
+
+  lineChart = new Chart(ctx).Line(affluence_chart_data, {
 		responsive: true,
     showScale: false,
     showTooltips: false,
     pointDot: false,
 	});
 
-  window.myBar = new Chart(ctx2).Bar(barChartData, {
-		responsive : true,
-    showScale: false,
-    showTooltips: false,
-	});
-}
+  setInterval(function(){
+    var chartData = Metrics.findOne().rush_hour_chart;
+
+    var affluence_chart_data = initLineChart(chartData);
+    lineChart.destroy();
+    lineChart = new Chart(ctx).Line(affluence_chart_data, {
+  		responsive: true,
+      showScale: false,
+      showTooltips: false,
+      pointDot: false,
+  	});
+    console.log("AGAIN");
+  }, 5000);
+});
+
+
+// window.onload = function(){
+//   //var ctx = document.getElementById("affluence_chart").getContext("2d");
+// 	var ctx2 = document.getElementById("top_urinal").getContext("2d");
+//
+//   console.log(Metrics.findOne({}));
+//
+//   var affluence_chart_data = {
+//   	labels : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
+//   	datasets : [
+//       {
+//         fillColor : "rgba(59,76,85,.4)",
+//         strokeColor : "rgba(59,76,85,1)",
+//         data: Metrics.findOne({}).rush_hour_chart
+//       },
+//   	]
+//   }
+//
+//   window.myLine = new Chart(ctx).Line(affluence_chart_data, {
+// 		responsive: true,
+//     showScale: false,
+//     showTooltips: false,
+//     pointDot: false,
+// 	});
+//
+//   window.myBar = new Chart(ctx2).Bar(barChartData, {
+// 		responsive : true,
+//     showScale: false,
+//     showTooltips: false,
+// 	});
+// }

@@ -81,6 +81,14 @@ var urinalgorithm = function (n, urinal_array){
 }
 
 Meteor.startup(() => {
+  Meteor.publish('urinals', function urinalsPublication() {
+    return Urinals.find();
+  });
+
+  Meteor.publish('metrics', function metricsPublication() {
+    return Metrics.find();
+  });
+
   const mqtt = require('mqtt');
   const MQTTClient = mqtt.connect('mqtt://localhost');
 
@@ -137,7 +145,9 @@ Meteor.startup(() => {
       urinalUpdateDict["$set"] = {};
 
       var pipeline = [
-        {$group: {_id: null, avg_time: {$avg: "$data.time_elapsed"}, max_time: {$max: "$data.time_elapsed"}, min_time: {$min: "$data.time_elapsed"}, avg_distance: {$avg: "$data.distance"}}}
+        {
+          $group: {_id: null, avg_time: {$avg: "$data.time_elapsed"}, max_time: {$max: "$data.time_elapsed"}, min_time: {$min: "$data.time_elapsed"}, avg_distance: {$avg: "$data.distance"}}
+        }
       ];
 
       var result = Pees.aggregate(pipeline);
@@ -161,6 +171,7 @@ Meteor.startup(() => {
         }
       } else if(topic === 'mictor-io.end') {
         urinalUpdateDict["$set"]["occupied"] = false;
+
         Pees.insert(jsonMessage);
       }
 
@@ -172,4 +183,27 @@ Meteor.startup(() => {
       callAlgorithm();
     })
   );
+
+  setInterval(Meteor.bindEnvironment(function(){
+    var pipeline = [
+      {
+        $group: {_id: {$hour:"$createdAt"}, "total":{$avg: "$data.time_elapsed"}}
+      },
+      {
+        $sort: {_id: 1}
+      }
+    ];
+    var result = Pees.aggregate(pipeline);
+
+    var rushHourChartData = [];
+    for(var i=0; i<24; i++){
+      try {
+        rushHourChartData.push(result[i]["total"]/1000);
+      } catch(error){
+        rushHourChartData.push(0);
+      }
+    }
+
+    Metrics.update({}, {"$set": {"rush_hour_chart": rushHourChartData}})
+  }), 5000);
 });

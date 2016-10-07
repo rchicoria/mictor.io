@@ -49,19 +49,9 @@
     </div>
 
     <div class="grid-50">
-      <div class="grid-grey grid-chart">
-        <canvas id="affluence_chart"></canvas>
-
-        <div class="metric-content">
-          <div class="metric-content__value">
-            <h1>14h</h1>
-          </div>
-
-          <div class="metric-content__desc">
-            <span>rush hour</span>
-          </div>
-        </div>
-      </div>
+      {{ #with metrics }}
+        {{ >rushhour }}
+      {{ /with }}
     </div>
   </div>
 
@@ -142,6 +132,22 @@
 
       <div class="metric-content__desc">
         <span>cm avarege distance of urinal</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="rushhour">
+  <div class="grid-grey grid-chart">
+    <canvas id="affluence_chart"></canvas>
+
+    <div class="metric-content">
+      <div class="metric-content__value">
+        <h1>14h</h1>
+      </div>
+
+      <div class="metric-content__desc">
+        <span>rush hour</span>
       </div>
     </div>
   </div>

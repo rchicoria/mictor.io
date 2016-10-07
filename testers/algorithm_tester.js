@@ -1,6 +1,6 @@
 const mqtt = require('mqtt');
-const MQTTClient = mqtt.connect('mqtt://104.236.192.113');
-// const MQTTClient = mqtt.connect('mqtt://localhost');
+// const MQTTClient = mqtt.connect('mqtt://104.236.192.113');
+const MQTTClient = mqtt.connect('mqtt://localhost');
 var pissingMin = 5000;
 var pissingMax = 30000;
 
