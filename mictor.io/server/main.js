@@ -170,7 +170,7 @@ Meteor.startup(() => {
           metricsUpdateDict["$inc"] = {violations: 1}
         }
       } else if(topic === 'mictor-io.end') {
-        if(jsonMessage.data["time_elapsed"] < 3){
+        if(jsonMessage.data["time_elapsed"] < 0){
           return;
         }
         urinalUpdateDict["$set"]["occupied"] = false;
