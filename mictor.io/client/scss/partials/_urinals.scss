@@ -1,17 +1,34 @@
-ul {
-  text-align: center;
-
-  li {
-    display: inline-block;
+.urinals-content {
+  > div {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
-  &.urinals {
+  &__list {
+    @include respond-to('screen-sm') {
+      margin-top: 10px;
+    }
+
     li {
+      width: 10%;
+      max-width: 93px;
       @include margin(null 10px null 10px);
 
+      @include respond-to('screen-xs') {
+        @include margin(null 5px null 5px);
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
       img {
-        width: auto;
-        height: 200px;
+        width: 100%;
+        height: auto;
       }
 
       .status {
@@ -34,11 +51,19 @@ ul {
     }
   }
 
-  &.urinal-metrics {
+  &__metrics {
     color: darken($blue, 10%);
     font-weight: $bold;
     @include display(flex);
-    @include flex-direction(row);
+
+    @include respond-to('screen-xs') {
+      margin-top: 20px;
+      @include flex-direction(column);
+    }
+
+    @include respond-to('screen-sm') {
+      @include flex-direction(row);
+    }
 
     li {
       @include margin(50px 10px null 10px);
@@ -48,6 +73,18 @@ ul {
       &:first-child {
         @include display(flex);
         @include justify-content(flex-end);
+
+        @include respond-to('screen-xs') {
+          margin-bottom: 5px;
+          @include justify-content(center);
+        }
+      }
+
+      @include respond-to('screen-xs') {
+        @include margin(0 0 0 0);
+        @include display(flex);
+        @include justify-content(center);
+        @include align-items(center);
       }
 
       h3 {
@@ -66,6 +103,10 @@ ul {
         padding-left: 10px;
         font-weight: $regular;
         line-height: 20px;
+
+        @include respond-to('screen-sm') {
+          width: 100px;
+        }
       }
     }
   }

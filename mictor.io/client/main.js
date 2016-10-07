@@ -28,11 +28,10 @@ Template.time.helpers({
 
 Template.distance.helpers({
   averageDistance() {
-    console.log("COISAS");
     return Math.round(this.avg_distance*100);
   }
 });
-//
+
 // Template.urinal.helpers({
 //   occupied() {
 //     return Template.instance().counter.get();
@@ -45,3 +44,45 @@ Template.distance.helpers({
 //     instance.counter.set(instance.counter.get() + 1);
 //   },
 // });
+
+// AFFLUENCE CHART
+var affluence_chart_data = {
+	labels : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
+	datasets : [
+    {
+      fillColor : "rgba(59,76,85,.4)",
+      strokeColor : "rgba(59,76,85,1)",
+      data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56],
+    },
+	]
+}
+
+// TOP URINAL
+var barChartData = {
+	labels : ["Urinal #1","Urinal #2","Urinal #3","Urinal #4","Urinal #5","Urinal #6"],
+	datasets : [
+		{
+			fillColor : "rgba(19,192,149,.1)",
+			strokeColor : "rgba(19,192,149,.2)",
+			data : ["2","4","3","5","9","4"],
+		}
+	]
+}
+
+window.onload = function(){
+  var ctx = document.getElementById("affluence_chart").getContext("2d");
+	var ctx2 = document.getElementById("top_urinal").getContext("2d");
+
+  window.myLine = new Chart(ctx).Line(affluence_chart_data, {
+		responsive: true,
+    showScale: false,
+    showTooltips: false,
+    pointDot: false,
+	});
+
+  window.myBar = new Chart(ctx2).Bar(barChartData, {
+		responsive : true,
+    showScale: false,
+    showTooltips: false,
+	});
+}
