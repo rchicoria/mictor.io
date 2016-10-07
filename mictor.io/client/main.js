@@ -22,13 +22,13 @@ Template.body.helpers({
 
 Template.time.helpers({
   averageTime() {
-    return Math.round(this.avg_time/1000);
+    return Math.round(this.avg_time);
   },
   minTime() {
-    return Math.round(this.min_time/1000);
+    return Math.round(this.min_time);
   },
   maxTime() {
-    return Math.round(this.max_time/1000);
+    return Math.round(this.max_time);
   },
 })
 

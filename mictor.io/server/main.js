@@ -198,7 +198,7 @@ Meteor.startup(() => {
     var rushHourChartData = [];
     for(var i=0; i<24; i++){
       try {
-        rushHourChartData.push(result[i]["total"]/1000);
+        rushHourChartData.push(result[i]["total"]);
       } catch(error){
         rushHourChartData.push(0);
       }
