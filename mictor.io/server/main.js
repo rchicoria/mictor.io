@@ -57,14 +57,33 @@ Meteor.startup(() => {
         metricsUpdateDict["$set"] = {ok: true};
       }
 
+      urinalUpdateDict["$set"] = {};
+
+      var pipeline = [
+        {$group: {_id: null, avg_time: {$avg: "$data.time_elapsed"}, max_time: {$max: "$data.time_elapsed"}, min_time: {$min: "$data.time_elapsed"}, avg_distance: {$avg: "$data.distance"}}}
+      ];
+
+      var result = Pees.aggregate(pipeline);
+      try {
+        metricsUpdateDict["$set"]["avg_time"] = result[0]["avg_time"];
+        metricsUpdateDict["$set"]["max_time"] = result[0]["max_time"];
+        metricsUpdateDict["$set"]["min_time"] = result[0]["min_time"];
+        metricsUpdateDict["$set"]["avg_distance"] = result[0]["avg_distance"];
+      } catch(err) {
+        metricsUpdateDict["$set"]["avg_time"] = 0;
+        metricsUpdateDict["$set"]["max_time"] = 0;
+        metricsUpdateDict["$set"]["min_time"] = 0;
+        metricsUpdateDict["$set"]["avg_distance"] = 0;
+      }
+
       if(topic === 'mictor-io.start') {
-        urinalUpdateDict["$set"] = { occupied: true };
+        urinalUpdateDict["$set"]["occupied"] = true ;
 
         if(!jsonMessage.data.waiting_for_piss){
           metricsUpdateDict["$inc"] = {violations: 1}
         }
       } else if(topic === 'mictor-io.end') {
-        urinalUpdateDict["$set"] = { occupied: false };
+        urinalUpdateDict["$set"]["occupied"] = false;
         Pees.insert(jsonMessage);
       }
 

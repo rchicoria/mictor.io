@@ -14,6 +14,25 @@ Template.body.helpers({
     return Metrics.findOne({})
   }
 });
+
+Template.time.helpers({
+  averageTime() {
+    return Math.round(this.avg_time/1000);
+  },
+  minTime() {
+    return Math.round(this.min_time/1000);
+  },
+  maxTime() {
+    return Math.round(this.max_time/1000);
+  },
+})
+
+Template.distance.helpers({
+  avgDistance() {
+    console.log("COISAS");
+    return Math.round(this.avg_distance*100);
+  }
+});
 //
 // Template.urinal.helpers({
 //   occupied() {

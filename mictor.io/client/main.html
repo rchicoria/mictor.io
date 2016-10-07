@@ -12,17 +12,17 @@
             <li>
               {{ #if ok}}
                 <img src="/images/like.svg" alt="" />
-                <span class="test">It's a good time<br /> to go</span>
+                <span>It's a good time<br /> to go</span>
               {{ else }}
                 <img src="/images/dislike.svg" alt="" />
-                <span class="test">Isn't a good<br /> time to go</span>
+                <span>Isn't a good time<br /> to go</span>
               {{ /if}}
             </li>
             <li>
-              <h2>
+              <h3>
                   {{ violations }}
-              </h2>
-              <span class="test">Algorithm<br /> violations</span>
+              </h3>
+              <span>Algorithm<br /> violations</span>
             </li>
           {{ /with }}
         </ul>
@@ -31,36 +31,16 @@
   </div>
 
   <div class="grid">
-    <div class="grid-50">
-      <div class="grid-yellow">
-        <div class="metric-content">
-          <div class="metric-content__value">
-            <h1>13</h1>
-          </div>
-
-          <div class="metric-content__desc">
-            seconds of average<br /> time in urinal.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid-50 grid-50__vertical">
-      <div class="grid-orange">
-        Max time.
-      </div>
-
-      <div class="grid-white">
-        Min time.
-      </div>
-    </div>
+    {{ #with metrics }}
+      {{ >time }}
+    {{ /with}}
   </div>
 
   <div class="grid">
     <div class="grid-50">
-      <div class="grid-purple">
-        Distance.
-      </div>
+      {{ #with metrics }}
+        {{ >distance }}
+      {{ /with}}
     </div>
 
     <div class="grid-50">
@@ -84,4 +64,60 @@
     <img src="/images/urinal.svg" alt="Urinal #{{ pos }}" />
     <div class="status status-{{#if wating_for_piss}}free{{else}}busy{{/if}}"></div>
   </li>
+</template>
+
+<template name="time">
+  <div class="grid-50">
+    <div class="grid-yellow">
+      <div class="metric-content">
+        <div class="metric-content__value">
+          <h1>{{ averageTime }}</h1>
+        </div>
+
+        <div class="metric-content__desc">
+          seconds of average time in urinal
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-50 grid-50__vertical">
+    <div class="grid-orange">
+      <div class="metric-content">
+        <div class="metric-content__value">
+          <h2>{{ maxTime }}</h2>
+        </div>
+
+        <div class="metric-content__desc">
+          seconds<br /> of maximum time on urinal
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-white">
+      <div class="metric-content">
+        <div class="metric-content__value">
+          <h2>{{ minTime }}</h2>
+        </div>
+
+        <div class="metric-content__desc">
+          seconds<br /> of minimum time on urinal
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="distance">
+  <div class="grid-purple">
+    <div class="metric-content">
+      <div class="metric-content__value">
+        <h1>{{ avgDistance }}</h1>
+      </div>
+
+      <div class="metric-content__desc">
+        cm avarege distance of urinal
+      </div>
+    </div>
+  </div>
 </template>
