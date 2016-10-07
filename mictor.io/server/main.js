@@ -81,6 +81,8 @@ var urinalgorithm = function (n, urinal_array){
 }
 
 Meteor.startup(() => {
+  var violUrinals = {};
+
   Meteor.publish('urinals', function urinalsPublication() {
     return Urinals.find();
   });
@@ -168,15 +170,17 @@ Meteor.startup(() => {
       if(topic === 'mictor-io.start') {
         urinalUpdateDict["$set"]["occupied"] = true ;
 
-        if(!jsonMessage.data.waiting_for_piss){
-          metricsUpdateDict["$inc"] = {violations: 1}
-        }
+        violUrinals[jsonMessage.frame_id] = !jsonMessage.data.waiting_for_piss;
+
       } else if(topic === 'mictor-io.end') {
         if(jsonMessage.data["time_elapsed"] < 0){
           discard=true;
         }
         urinalUpdateDict["$set"]["occupied"] = false;
         if(!discard){
+          if(violUrinals[jsonMessage.frame_id]){
+            metricsUpdateDict["$inc"] = {violations: 1}
+          }
           Pees.insert(jsonMessage);
         }
       }
