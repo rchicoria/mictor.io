@@ -23,11 +23,13 @@ var endCallback = function(id, pissingTime){
       "time_elapsed": pissingTime
     }
   }));
-  setTimeout(startCallback, rand(sleepingMin, sleepingMax), id);
+  setTimeout(startCallback, 5000);
 }
 
-var startCallback = function(id){
-  console.log("START "+id);
+var startCallback = function(){
+  var myId = "mictor1"//"mictor"+Math.round(rand(1,6));
+
+  console.log("START "+myId);
 
   var myRandomValue = Math.random();
   var violated = false;
@@ -35,23 +37,19 @@ var startCallback = function(id){
     violated = true;
   }
 
+
   MQTTClient.publish('mictor-io.start', JSON.stringify({
-    "frame_id": id,
+    "frame_id": myId,
     "data": {
       "waiting_for_piss": !violated
     }
   }));
   var pissingTime = rand(pissingMin, pissingMax);
-  setTimeout(endCallback, pissingTime, id, pissingTime);
+  setTimeout(endCallback, 5000, myId, pissingTime);
 }
 
 var test = function(){
-  startCallback("mictor1");
-  startCallback("mictor2");
-  startCallback("mictor3");
-  startCallback("mictor4");
-  startCallback("mictor5");
-  startCallback("mictor6");
+  startCallback();
 }
 
 MQTTClient.on('connect', () => {
