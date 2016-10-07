@@ -80,12 +80,12 @@
 
       &.grid-green {
         background-color: $green;
-        color: rgba($black, .7);
+        color: darken($green, 10%);
       }
 
       &.grid-chart {
         position: relative;
-        @include padding(0 0 0 0);
+        @include padding(50px 0 2px 0);
 
         canvas {
           width: 100%;

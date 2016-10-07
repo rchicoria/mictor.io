@@ -57,12 +57,32 @@ var affluence_chart_data = {
 	]
 }
 
+// TOP URINAL
+var barChartData = {
+	labels : ["Urinal #1","Urinal #2","Urinal #3","Urinal #4","Urinal #5","Urinal #6"],
+	datasets : [
+		{
+			fillColor : "rgba(19,192,149,.1)",
+			strokeColor : "rgba(19,192,149,.2)",
+			data : ["2","4","3","5","9","4"],
+		}
+	]
+}
+
 window.onload = function(){
-	var ctx = document.getElementById("affluence_chart").getContext("2d");
-	window.myLine = new Chart(ctx).Line(affluence_chart_data, {
+  var ctx = document.getElementById("affluence_chart").getContext("2d");
+	var ctx2 = document.getElementById("top_urinal").getContext("2d");
+
+  window.myLine = new Chart(ctx).Line(affluence_chart_data, {
 		responsive: true,
     showScale: false,
     showTooltips: false,
     pointDot: false,
+	});
+
+  window.myBar = new Chart(ctx2).Bar(barChartData, {
+		responsive : true,
+    showScale: false,
+    showTooltips: false,
 	});
 }
