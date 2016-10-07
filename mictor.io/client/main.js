@@ -109,33 +109,33 @@ Template.rushhour.onRendered(function () {
 });
 
 
-// window.onload = function(){
-//   //var ctx = document.getElementById("affluence_chart").getContext("2d");
-// 	var ctx2 = document.getElementById("top_urinal").getContext("2d");
-//
-//   console.log(Metrics.findOne({}));
-//
-//   var affluence_chart_data = {
-//   	labels : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
-//   	datasets : [
-//       {
-//         fillColor : "rgba(59,76,85,.4)",
-//         strokeColor : "rgba(59,76,85,1)",
-//         data: Metrics.findOne({}).rush_hour_chart
-//       },
-//   	]
-//   }
-//
-//   window.myLine = new Chart(ctx).Line(affluence_chart_data, {
-// 		responsive: true,
-//     showScale: false,
-//     showTooltips: false,
-//     pointDot: false,
-// 	});
-//
-//   window.myBar = new Chart(ctx2).Bar(barChartData, {
-// 		responsive : true,
-//     showScale: false,
-//     showTooltips: false,
-// 	});
-// }
+window.onload = function(){
+  //var ctx = document.getElementById("affluence_chart").getContext("2d");
+	var ctx2 = document.getElementById("top_urinal").getContext("2d");
+
+  console.log(Metrics.findOne({}));
+
+  // var affluence_chart_data = {
+  // 	labels : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
+  // 	datasets : [
+  //     {
+  //       fillColor : "rgba(59,76,85,.4)",
+  //       strokeColor : "rgba(59,76,85,1)",
+  //       data: Metrics.findOne({}).rush_hour_chart
+  //     },
+  // 	]
+  // }
+
+  // window.myLine = new Chart(ctx).Line(affluence_chart_data, {
+	// 	responsive: true,
+  //   showScale: false,
+  //   showTooltips: false,
+  //   pointDot: false,
+	// });
+
+  window.myBar = new Chart(ctx2).Bar(barChartData, {
+		responsive : true,
+    showScale: false,
+    showTooltips: false,
+	});
+}
