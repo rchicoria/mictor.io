@@ -198,6 +198,7 @@ Meteor.startup(() => {
     var rushHourChartData = [];
     var max = -1;
     var rushHour = 0;
+    console.log(result);
     for(var i=0; i<24; i++){
       console.log(i);
       try {
