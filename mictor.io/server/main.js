@@ -196,7 +196,13 @@ Meteor.startup(() => {
     var result = Pees.aggregate(pipeline);
 
     var rushHourChartData = [];
+    var max = -1;
+    var rushHour = 0;
     for(var i=0; i<24; i++){
+      if(result[i]["total"] > max || result[i]["total"] == -1){
+        max = result[i]["total"];
+        rushHour = i;
+      }
       try {
         rushHourChartData.push(result[i]["total"]);
       } catch(error){
@@ -204,6 +210,6 @@ Meteor.startup(() => {
       }
     }
 
-    Metrics.update({}, {"$set": {"rush_hour_chart": rushHourChartData}})
-  }), 60*1000);
+    Metrics.update({}, {"$set": {"rush_hour_chart": rushHourChartData, "rush_hour": rushHour}})
+  }), 5*1000);
 });
