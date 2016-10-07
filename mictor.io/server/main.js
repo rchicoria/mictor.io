@@ -201,16 +201,25 @@ Meteor.startup(() => {
     console.log(result);
     for(var i=0; i<24; i++){
       console.log(i);
-      try {
-        if(result[i]["total"] > max || result[i]["total"] == -1){
+      if(result.length > 0 && result[0]["_id"] == i){
+        if(result[i]["total"] > max || max == -1){
           max = result[i]["total"];
           rushHour = i;
         }
         rushHourChartData.push(result[i]["total"]);
-      } catch(error){
+        results.pop();
+      } else {
         rushHourChartData.push(0);
-        console.log("error");
       }
+      //   if(result[i]["total"] > max || result[i]["total"] == -1){
+      //     max = result[i]["total"];
+      //     rushHour = i;
+      //   }
+      //   rushHourChartData.push(result[i]["total"]);
+      // } catch(error){
+      //   rushHourChartData.push(0);
+      //   console.log("error");
+      // }
       console.log(rushHourChartData);
     }
 
