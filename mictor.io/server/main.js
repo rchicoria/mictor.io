@@ -229,7 +229,7 @@ Meteor.startup(() => {
   setInterval(Meteor.bindEnvironment(function(){
     var pipeline = [
       {
-        $group: {_id: {$hour:"$createdAt"}, "total":{$avg: "$data.time_elapsed"}}
+        $group: {_id: {$hour:"$createdAt"}, "total":{$sum: 1}}
       },
       {
         $sort: {_id: 1}
